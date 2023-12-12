@@ -1,6 +1,10 @@
 package menu.controller;
 
-import menu.model.Coaches;
+import java.util.List;
+
+import menu.domain.coach.Coach;
+import menu.domain.coach.Coaches;
+import menu.domain.menu.Menu;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -17,5 +21,13 @@ public class MenuController {
     public void run() {
         outputView.printStartMessage();
         Coaches coaches = inputView.askCoachNames();
+        askAndSetDislikedMenus(coaches);
+    }
+
+    private void askAndSetDislikedMenus(Coaches coaches) {
+        for (Coach coach : coaches.getCoaches()) {
+            List<Menu> dislikedMenus = inputView.askDislikedMenusByCoach(coach);
+            coach.addDislikedMenus(dislikedMenus);
+        }
     }
 }
