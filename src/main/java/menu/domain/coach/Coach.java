@@ -1,10 +1,12 @@
-package menu.model;
+package menu.domain.coach;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import menu.domain.menu.Menu;
 
 public class Coach {
 

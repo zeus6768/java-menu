@@ -1,4 +1,4 @@
-package menu.model;
+package menu.domain.coach;
 
 import java.util.Collection;
 import java.util.List;
