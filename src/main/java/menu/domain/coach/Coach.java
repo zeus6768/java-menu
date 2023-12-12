@@ -26,6 +26,11 @@ public class Coach {
         return new Coach(name);
     }
 
+    public void putDislikedMenus(Collection<Menu> menus) {
+        validateMenuSize(menus);
+        dislikedMenus.addAll(menus);
+    }
+
     private void validate(String name) {
         int length = name.length();
         if (length < MIN_NAME_LENGTH || length > MAX_NAME_LENGTH) {
@@ -38,16 +43,10 @@ public class Coach {
         }
     }
 
-    public void addDislikedMenus(Collection<Menu> menus) {
-        dislikedMenus.addAll(menus);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Set<Menu> getDislikedMenus() {
-        return Collections.unmodifiableSet(dislikedMenus);
+    private void validateMenuSize(Collection<Menu> menus) {
+        if (menus.size() > 2) {
+            throw new IllegalArgumentException("못 먹는 메뉴는 최대 2개까지 입력할 수 있습니다.");
+        }
     }
 
     @Override
@@ -59,5 +58,13 @@ public class Coach {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Set<Menu> getDislikedMenus() {
+        return Collections.unmodifiableSet(dislikedMenus);
     }
 }

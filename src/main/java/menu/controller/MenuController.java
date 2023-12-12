@@ -27,7 +27,7 @@ public class MenuController {
     private void askAndSetDislikedMenus(Coaches coaches) {
         for (Coach coach : coaches.getCoaches()) {
             List<Menu> dislikedMenus = inputView.askDislikedMenusByCoach(coach);
-            coach.addDislikedMenus(dislikedMenus);
+            coach.putDislikedMenus(dislikedMenus);
         }
     }
 }
