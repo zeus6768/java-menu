@@ -1,7 +1,9 @@
 package menu.service;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -12,6 +14,11 @@ import menu.domain.constant.Category;
 import menu.domain.constant.DayOfWeek;
 
 public class MenuService {
+
+    public Coaches createCoaches(String[] coachNames) {
+        List<Coach> coaches = Arrays.stream(coachNames).map(Coach::from).toList();
+        return Coaches.from(coaches);
+    }
 
     public Map<DayOfWeek, Category> recommendCategories() {
         Map<DayOfWeek, Category> recommendations = new TreeMap<>();

@@ -14,6 +14,8 @@ public class MenuConfig {
     private InputView inputView;
     private OutputView outputView;
 
+    private MenuConfig() {}
+
     public static MenuConfig getInstance() {
         if (menuConfig == null) {
             menuConfig = new MenuConfig();
