@@ -1,11 +1,8 @@
 package menu.controller;
 
-import java.util.Map;
-
 import menu.domain.coach.Coach;
 import menu.domain.coach.Coaches;
-import menu.domain.constant.Category;
-import menu.domain.constant.DayOfWeek;
+import menu.domain.result.RecommendResult;
 import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -26,9 +23,8 @@ public class MenuController {
         outputView.printStartMessage();
         Coaches coaches = createCoaches();
         askAndPutDislikedMenus(coaches);
-        Map<DayOfWeek, Category> categoryRecommendations = recommendCategories();
-        Map<Coach, Map<DayOfWeek, String>> menuRecommendations = recommendMenus(coaches, categoryRecommendations);
-        outputView.printResult(categoryRecommendations, menuRecommendations);
+        RecommendResult result = recommend(coaches);
+        outputView.printResult(result);
     }
 
     private Coaches createCoaches() {
@@ -43,11 +39,7 @@ public class MenuController {
         }
     }
 
-    private Map<DayOfWeek, Category> recommendCategories() {
-        return menuService.recommendCategories();
-    }
-
-    private Map<Coach, Map<DayOfWeek, String>> recommendMenus(Coaches coaches, Map<DayOfWeek, Category> categories) {
-        return menuService.recommendMenus(coaches, categories);
+    private RecommendResult recommend(Coaches coaches) {
+        return menuService.recommend(coaches);
     }
 }

@@ -1,12 +1,12 @@
 package menu.view;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.StringJoiner;
 
 import menu.domain.coach.Coach;
 import menu.domain.constant.Category;
 import menu.domain.constant.DayOfWeek;
+import menu.domain.result.RecommendResult;
 
 public class OutputView {
 
@@ -14,10 +14,11 @@ public class OutputView {
         System.out.println("점심 메뉴 추천을 시작합니다.");
     }
 
-    public void printResult(Map<DayOfWeek, Category> categoryRecommendations,
-                            Map<Coach, Map<DayOfWeek, String>> menuRecommendations) {
-        printCategories(categoryRecommendations);
-        printMenusByCoach(menuRecommendations);
+    public void printResult(RecommendResult result) {
+        System.out.println("메뉴 추천 결과입니다.");
+        printCategories(result.categoryRecommendations());
+        printMenusByCoach(result.menuRecommendations());
+        System.out.println("\n추천을 완료했습니다.");
     }
 
     public void printCategories(Map<DayOfWeek, Category> categoryRecommendations) {
