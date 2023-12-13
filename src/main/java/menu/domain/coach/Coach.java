@@ -1,12 +1,10 @@
 package menu.domain.coach;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import menu.domain.menu.Menu;
 
 public class Coach {
 
@@ -14,7 +12,7 @@ public class Coach {
     private static final int MAX_NAME_LENGTH = 4;
 
     private final String name;
-    private final Set<Menu> dislikedMenus;
+    private final Set<String> dislikedMenus;
 
     private Coach(String name) {
         validate(name);
@@ -26,9 +24,9 @@ public class Coach {
         return new Coach(name);
     }
 
-    public void putDislikedMenus(Collection<Menu> menus) {
+    public void putDislikedMenus(String[] menus) {
         validateMenuSize(menus);
-        dislikedMenus.addAll(menus);
+        dislikedMenus.addAll(Arrays.asList(menus));
     }
 
     private void validate(String name) {
@@ -43,8 +41,8 @@ public class Coach {
         }
     }
 
-    private void validateMenuSize(Collection<Menu> menus) {
-        if (menus.size() > 2) {
+    private void validateMenuSize(String[] menus) {
+        if (menus.length > 2) {
             throw new IllegalArgumentException("못 먹는 메뉴는 최대 2개까지 입력할 수 있습니다.");
         }
     }
@@ -64,7 +62,7 @@ public class Coach {
         return name;
     }
 
-    public Set<Menu> getDislikedMenus() {
+    public Set<String> getDislikedMenus() {
         return Collections.unmodifiableSet(dislikedMenus);
     }
 }
