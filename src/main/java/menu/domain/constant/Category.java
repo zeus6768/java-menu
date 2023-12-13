@@ -24,6 +24,11 @@ public enum Category {
         return values()[Randoms.pickNumberInRange(1, 5)];
     }
 
+    public static String getRandomMenu(Category category) {
+        List<String> menus = category.getMenus();
+        return Randoms.shuffle(menus).get(0);
+    }
+
     public String getName() {
         return name;
     }

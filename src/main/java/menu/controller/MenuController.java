@@ -28,7 +28,8 @@ public class MenuController {
         outputView.printStartMessage();
         Coaches coaches = createCoaches();
         askAndSetDislikedMenus(coaches);
-        Map<DayOfWeek, Category> recommendedCategories = recommendCategories();
+        Map<DayOfWeek, Category> categories = recommendCategories();
+        Map<Coach, Map<DayOfWeek, String>> menuRecommendations = recommendMenus(coaches, categories);
     }
 
     private Coaches createCoaches() {
@@ -46,5 +47,9 @@ public class MenuController {
 
     private Map<DayOfWeek, Category> recommendCategories() {
         return menuService.recommendCategories();
+    }
+
+    private Map<Coach, Map<DayOfWeek, String>> recommendMenus(Coaches coaches, Map<DayOfWeek, Category> categories) {
+        return menuService.recommendMenus(coaches, categories);
     }
 }
