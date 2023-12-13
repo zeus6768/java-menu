@@ -1,7 +1,5 @@
 package menu.controller;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import menu.domain.coach.Coach;
@@ -27,18 +25,18 @@ public class MenuController {
     public void run() {
         outputView.printStartMessage();
         Coaches coaches = createCoaches();
-        askAndSetDislikedMenus(coaches);
-        Map<DayOfWeek, Category> categories = recommendCategories();
-        Map<Coach, Map<DayOfWeek, String>> menuRecommendations = recommendMenus(coaches, categories);
+        askAndPutDislikedMenus(coaches);
+        Map<DayOfWeek, Category> categoryRecommendations = recommendCategories();
+        Map<Coach, Map<DayOfWeek, String>> menuRecommendations = recommendMenus(coaches, categoryRecommendations);
+        outputView.printResult(categoryRecommendations, menuRecommendations);
     }
 
     private Coaches createCoaches() {
         String[] coachNames = inputView.askCoachNames();
-        List<Coach> coaches = Arrays.stream(coachNames).map(Coach::from).toList();
-        return Coaches.from(coaches);
+        return menuService.createCoaches(coachNames);
     }
 
-    private void askAndSetDislikedMenus(Coaches coaches) {
+    private void askAndPutDislikedMenus(Coaches coaches) {
         for (Coach coach : coaches.getCoaches()) {
             String[] dislikedMenus = inputView.askDislikedMenusByCoach(coach);
             coach.putDislikedMenus(dislikedMenus);
