@@ -1,7 +1,6 @@
 package menu.config;
 
 import menu.controller.MenuController;
-import menu.domain.menu.Menus;
 import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -14,7 +13,6 @@ public class MenuConfig {
     private MenuService menuService;
     private InputView inputView;
     private OutputView outputView;
-    private Menus menus;
 
     public static MenuConfig getInstance() {
         if (menuConfig == null) {
@@ -27,7 +25,8 @@ public class MenuConfig {
         if (menuController == null) {
             menuController = new MenuController(
                     inputView(),
-                    outputView()
+                    outputView(),
+                    menuService()
             );
         }
         return menuController;
@@ -42,7 +41,7 @@ public class MenuConfig {
 
     public InputView inputView() {
         if (inputView == null) {
-            inputView = new InputView(menus());
+            inputView = new InputView();
         }
         return inputView;
     }
@@ -52,12 +51,5 @@ public class MenuConfig {
             outputView = new OutputView();
         }
         return outputView;
-    }
-
-    public Menus menus() {
-        if (menus == null) {
-            menus = new Menus();
-        }
-        return menus;
     }
 }
