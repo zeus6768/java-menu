@@ -1,5 +1,6 @@
 package menu.domain.constant;
 
+import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -27,6 +28,10 @@ public enum Category {
     public static String getRandomMenu(Category category) {
         List<String> menus = category.getMenus();
         return Randoms.shuffle(menus).get(0);
+    }
+
+    public static boolean containsMenu(String menu) {
+        return Arrays.stream(values()).anyMatch(category -> category.menus.contains(menu));
     }
 
     public String getName() {
