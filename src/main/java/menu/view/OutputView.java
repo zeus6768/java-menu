@@ -15,7 +15,7 @@ public class OutputView {
     }
 
     public void printResult(RecommendResult result) {
-        System.out.println("메뉴 추천 결과입니다.");
+        System.out.println("\n메뉴 추천 결과입니다.");
         printCategories(result.categoryRecommendations());
         printMenusByCoach(result.menuRecommendations());
         System.out.println("\n추천을 완료했습니다.");
