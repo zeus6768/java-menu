@@ -1,6 +1,7 @@
 package menu.config;
 
 import menu.controller.MenuController;
+import menu.exception.ExceptionHandler;
 import menu.service.MenuService;
 import menu.view.InputView;
 import menu.view.OutputView;
@@ -13,6 +14,7 @@ public class MenuConfig {
     private MenuService menuService;
     private InputView inputView;
     private OutputView outputView;
+    private ExceptionHandler exceptionHandler;
 
     private MenuConfig() {}
 
@@ -36,7 +38,7 @@ public class MenuConfig {
 
     public MenuService menuService() {
         if (menuService == null) {
-            menuService = new MenuService();
+            menuService = new MenuService(exceptionHandler());
         }
         return menuService;
     }
@@ -53,5 +55,12 @@ public class MenuConfig {
             outputView = new OutputView();
         }
         return outputView;
+    }
+
+    public ExceptionHandler exceptionHandler() {
+        if (exceptionHandler == null) {
+            exceptionHandler = new ExceptionHandler();
+        }
+        return exceptionHandler;
     }
 }

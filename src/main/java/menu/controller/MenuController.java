@@ -1,6 +1,5 @@
 package menu.controller;
 
-import menu.domain.coach.Coach;
 import menu.domain.coach.Coaches;
 import menu.domain.result.RecommendResult;
 import menu.service.MenuService;
@@ -22,24 +21,20 @@ public class MenuController {
     public void run() {
         outputView.printStartMessage();
         Coaches coaches = createCoaches();
-        askAndPutDislikedMenus(coaches);
-        RecommendResult result = recommend(coaches);
+        putDislikedMenus(coaches);
+        RecommendResult result = recommendMenus(coaches);
         outputView.printResult(result);
     }
 
     private Coaches createCoaches() {
-        String[] coachNames = inputView.askCoachNames();
-        return menuService.createCoaches(coachNames);
+        return menuService.createCoaches(inputView::askCoachNames);
     }
 
-    private void askAndPutDislikedMenus(Coaches coaches) {
-        for (Coach coach : coaches.getCoaches()) {
-            String[] dislikedMenus = inputView.askDislikedMenusByCoach(coach);
-            coach.putDislikedMenus(dislikedMenus);
-        }
+    private void putDislikedMenus(Coaches coaches) {
+        menuService.putDislikedMenus(coaches, inputView::askDislikedMenusByCoach);
     }
 
-    private RecommendResult recommend(Coaches coaches) {
-        return menuService.recommend(coaches);
+    private RecommendResult recommendMenus(Coaches coaches) {
+        return menuService.recommendMenus(coaches);
     }
 }
